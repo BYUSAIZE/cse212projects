@@ -1,11 +1,13 @@
-﻿public class DuplicateCounterSolution
-{
-    //CSE 212 Lesson 5C Solved
-    //Count how many duplicates are in a collection of data.
+﻿using System;
+using System.Collections.Generic;
 
+public class DuplicateCounterSolution
+{
+    // Counts repeated occurrences in a collection of data.
     public static void Run()
     {
-        int[] data = [
+        int[] data =
+        [
             50, 9, 24, 100, 7, 75, 93, 24, 17, 16, 97, 6, 18, 81, 48, 37, 49, 33, 60, 3, 99, 32, 88, 29, 65, 20, 35, 33,
             15, 81, 31, 93, 17, 5, 5, 79, 12, 91, 18, 31, 12, 94, 39, 98, 10, 72, 20, 79, 100, 27, 46, 28, 50, 1, 7, 14,
             78, 100, 55, 26, 48, 33, 96, 77, 69, 8, 33, 36, 42, 98, 42, 32, 49, 65, 1, 82, 30, 74, 73, 89, 23, 76, 25,
@@ -25,29 +27,27 @@
     }
 
     /// <summary>
-    /// Loop through the data, check for membership in the set.
-    /// If yes, then increase the counter; otherwise, add it to the set.
+    /// Counts repeated occurrences while checking membership in a set.
     /// </summary>
     private static int CountDuplicates(int[] data)
     {
-        // Add code here.
         var unique = new HashSet<int>();
-        var duplicates = 0;
+        int duplicates = 0;
 
-        foreach (var x in data)
+        foreach (int number in data)
         {
-            if (unique.Contains(x))
+            if (!unique.Add(number))
+            {
                 duplicates++;
-            else
-                unique.Add(x);
+            }
         }
 
         return duplicates;
     }
 
     /// <summary>
-    /// Add everything in the data to the set. Duplicates will be automatically ignored.
-    /// Subtract the length of the set from the length of the data.
+    /// Counts duplicates by subtracting the number of unique values
+    /// from the total number of values.
     /// </summary>
     private static int CountDuplicatesAlternate(int[] data)
     {
